@@ -2,30 +2,29 @@ import React, { Component } from 'react'
 import { Button, Input, Header } from 'semantic-ui-react'
 import './CreateTableForm.css'
 
-import FileAccess from '../../Services/FileAccess'
-const fileAccess = new FileAccess()
-
+import CreateTableController from '../../Controllers/CreateTableController'
 
 class CreateTableForm extends Component {
   constructor () {
     super()
+    this.controller = new CreateTableController()
     this.tableLabelInput = React.createRef()
     this.tableFileInput = React.createRef()
   }
 
   handleSubmit = async e => {
     e.preventDefault()
+    const label = this.tableLabelInput.current.inputRef.current.value
+    const file = this.tableFileInput.current.inputRef.current.files[0]
 
-    fileAccess.setFile(this.tableFileInput.current.inputRef.current.files[0])
-    const fileData = await fileAccess.readFile()
-    console.log(fileData)
+    this.controller.submitLocalFile({ label, file })
   }
 
   render = () => {
     return (
       <div className='CreateTableForm'>
         <Header as='h3'>Create Table From File</Header>
-        <form onSubmit={this.handleSubmit}>
+        <div>
           <Input
             placeholder='Table Label'
             ref={this.tableLabelInput}
@@ -42,11 +41,11 @@ class CreateTableForm extends Component {
             style={{ width: '300px' }}
           />
 
-        <div className='creatTableFormSubmitButtons'>
-          <Button content='Confirm' primary />
-          <Button content='Confirm' secondary />
+          <div className='creatTableFormSubmitButtons'>
+            <Button content='Cancel' secondary />
+            <Button content='Confirm' primary onClick={this.handleSubmit} />
+          </div>
         </div>
-        </form>
       </div>
     )
   }
