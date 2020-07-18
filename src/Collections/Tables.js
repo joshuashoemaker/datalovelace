@@ -23,15 +23,9 @@ class Tables {
     }
   }
 
-  removeTableById = id => {
+  removeById = id => {
     const indexToRemove = this.collection.findIndex(t => t.id === id)
-    if (this.collection.length === 1 && indexToRemove > -1) {
-      this.collection = []
-    }
-    else {
-      const modifiedCollection = this.collection.splice(indexToRemove, 1)
-      this.collection = modifiedCollection
-    }
+    if (indexToRemove > -1) this.collection.splice(indexToRemove, 1)
   }
 
   getCollectionProps = () => this.collection.map(table => table.getProperties())

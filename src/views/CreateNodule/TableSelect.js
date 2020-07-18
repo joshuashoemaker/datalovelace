@@ -9,14 +9,25 @@ class TableSelect extends Component {
     super()
     this.tables = new Tables()
     this.state = {
-      selectedTables: [],
+      selectedTablesLabels: [],
       tables: this.tables.getCollectionProps()
     }
     document.addEventListener('updateTables', this.updateTableList)
   }
 
+  getSelectedTableLabels = () => this.state.selectedTablesLabels
+
   toggleSelect = label => {
-    console.log(label)
+    const { selectedTablesLabels } = this.state
+    let newselectedTablesLabels = selectedTablesLabels
+  
+    const selectedIndex = selectedTablesLabels.findIndex(selected => selected === label)
+
+    if (selectedIndex === -1) newselectedTablesLabels.push(label)
+    else if (selectedIndex === 0 && selectedTablesLabels.length === 1) newselectedTablesLabels = []
+    else newselectedTablesLabels.splice(selectedIndex, 1)
+
+    this.setState({ selectedTablesLabels: newselectedTablesLabels })
   }
 
   updateTableList = () => {
@@ -24,11 +35,11 @@ class TableSelect extends Component {
   }
 
   renderTableLabels = () => {
-    const { selectedTables, tables } = this.state
+    const { selectedTablesLabels, tables } = this.state
     const tableLabelElements = tables.map(t => {
-      const isSelected = label => selectedTables.includes(label)
+      const isSelected = selectedTablesLabels.includes(t.label)
       return (
-        <Label onClick={() => this.toggleSelect(t.label)}>
+        <Label onClick={() => this.toggleSelect(t.label)} color={isSelected ? 'blue' : 'grey'} style={{ cursor: 'pointer' }}>
           {t.label}
           { isSelected ? <Icon name='delete' /> : '' }
         </Label>
