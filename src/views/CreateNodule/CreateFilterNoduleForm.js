@@ -1,44 +1,48 @@
 import React, { Component } from 'react'
-import { Input, Dropdown, Grid } from 'semantic-ui-react'
+import { Input, Dropdown, Grid, Button, Icon, List } from 'semantic-ui-react'
 import './CreateNodule.css'
 
 class CreateFilterNoduleForm extends Component {
   constructor () {
     super()
-    this.state = { filterType: '' }
+    this.state = {
+      filterType: '',
+      filterParams: {}
+    }
 
-    this.keyInput1 = React.createRef()
-    this.keyInput2 = React.createRef()
-    this.keyInput3 = React.createRef()
-    this.valueInput1 = React.createRef()
-    this.valueInput2 = React.createRef()
-    this.valueInput3 = React.createRef()
+    this.keyInput = React.createRef()
+    this.valueInput = React.createRef()
     document.addEventListener('updateTables', this.updateTableList)
+  }
+
+  addKeyValueInput = () => {
+    let filterParams = this.state.filterParams || {}
+
+    if (this.keyInput.current.inputRef.current.value)
+      filterParams[this.keyInput.current.inputRef.current.value] = this.valueInput.current.inputRef.current.value
+
+    this.setState({ filterParams: filterParams })
   }
 
   handleChange = (e, value) => {
     this.setState({ filterType: value.value })
   }
 
-  getFilterProperties = () => {
-    let filterParams = {}
+  renderFilterParams = () => {
+    const { filterParams } = this.state
 
-    if (this.keyInput1.current.inputRef.current.value)
-      filterParams[this.keyInput1.current.inputRef.current.value] = this.valueInput1.current.inputRef.current.value
-    
-    if (this.keyInput2.current.inputRef.current.value)
-      filterParams[this.keyInput2.current.inputRef.current.value] = this.valueInput2.current.inputRef.current.value
-    
-    if (this.keyInput3.current.inputRef.current.value)
-      filterParams[this.keyInput3.current.inputRef.current.value] = this.valueInput3.current.inputRef.current.value
-
-    return {
-      filterType: this.state.filterType,
-      filterParams
+    let filterKeyElements = []
+    let filterValueElements = []
+    for (let key in filterParams) {
+      filterKeyElements.push(<List.Item>{key}</List.Item>)
+      filterValueElements.push(<List.Item>{filterParams[key]}</List.Item>)
     }
+
+    return { filterKeyElements, filterValueElements }
   }
 
   render = () => {
+    const filterParamElements = this.renderFilterParams()
     return (
       <div className='CreateFiltrerNoduleForm'>
         <Dropdown
@@ -57,14 +61,20 @@ class CreateFilterNoduleForm extends Component {
 
         <Grid columns={2} relaxed='very' stackable>
           <Grid.Column>
-            <Input placeholder='Key' ref={this.keyInput1} style={{ width: '115px' }} />
-            <Input placeholder='Key' ref={this.keyInput2} style={{ width: '115px' }} />
-            <Input placeholder='Key' ref={this.keyInput3} style={{ width: '115px' }} />
+            <List celled>
+              { filterParamElements.filterKeyElements }
+            </List>
+            <Input placeholder='Key' ref={this.keyInput} style={{ width: '115px' }} />
           </Grid.Column>
           <Grid.Column>
-            <Input placeholder='Value' ref={this.valueInput1} style={{ width: '115px' }} />
-            <Input placeholder='Value' ref={this.valueInput2} style={{ width: '115px' }} />
-            <Input placeholder='Value' ref={this.valueInput3} style={{ width: '115px' }} />
+            <List celled>
+              { filterParamElements.filterValueElements }
+            </List>
+            <Input placeholder='Key' ref={this.valueInput} style={{ width: '115px' }} />
+            <Button animated='vertical' onClick={this.addKeyValueInput}>
+              <Button.Content hidden><Icon name='add' /></Button.Content>
+              <Button.Content visible>Add</Button.Content>
+            </Button>
           </Grid.Column>
         </Grid>
       </div>

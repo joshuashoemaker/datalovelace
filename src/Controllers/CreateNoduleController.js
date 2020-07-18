@@ -20,12 +20,11 @@ class CreateNoduleController {
       filterParams,
       tables
     })
-    console.log(this.nodules)
     document.dispatchEvent(this.updatedNodulesEvent)
   }
 
   deleteNodule = id => {
-    this.nodules.removeTableById(id)
+    this.nodules.removeById(id)
     document.dispatchEvent(this.updatedNodulesEvent)
   }
 }

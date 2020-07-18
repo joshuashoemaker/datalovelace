@@ -7,7 +7,7 @@ class TableListController {
   }
 
   deleteTable = id => {
-    this.tables.removeTableById(id)
+    this.tables.removeById(id)
     document.dispatchEvent(this.updatedTablesEvent)
   }
 }

@@ -27,14 +27,12 @@ class Nodules {
 
   removeById = id => {
     const indexToRemove = this.collection.findIndex(n => n.id === id)
-    if (this.collection.length === 1 && indexToRemove > -1) {
-      this.collection = []
-    }
-    else {
-      const modifiedCollection = this.collection.splice(indexToRemove, 1)
-      this.collection = modifiedCollection
-    }
+    if (indexToRemove > -1) this.collection.splice(indexToRemove, 1)
   }
+
+  getCollectionProps = () => this.collection.map(nodule => nodule.getProperties())
+
+  getTableByLabel = label => this.collection.find(n => label === n.label)
 }
 
 export default Nodules

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Header, Dropdown, Table } from 'semantic-ui-react'
+import { Button, Input, Header, Dropdown } from 'semantic-ui-react'
 import CreateFilterNoduleForm from './CreateFilterNoduleForm'
 import './CreateNodule.css'
 
@@ -20,6 +20,8 @@ class CreateNodule extends Component {
     this.controller = new CreateNoduleController()
 
     this.filterNoduleForm = React.createRef()
+    this.tableSelect = React.createRef()
+    this.noduleLabelInput = React.createRef()
 
     document.addEventListener('updateTables', this.updateTableList)
   }
@@ -29,8 +31,19 @@ class CreateNodule extends Component {
   }
 
   handleSubmit = () => {
-    if (this.state.noduleType === 'filter')
-      console.log(this.filterNoduleForm.current.getFilterProperties())
+
+    const noduleLabel = this.noduleLabelInput.current.inputRef.current.value
+    const selectedTableLabels = this.tableSelect.current.getSelectedTableLabels()
+
+    if (this.state.noduleType === 'filter') {
+      const filterProperties = this.filterNoduleForm.current.getFilterProperties()
+      this.controller.addNewFilterNodule({
+        label: noduleLabel,
+        tablesToImportByLabel: selectedTableLabels,
+        filterType: filterProperties.filterType,
+        filterParams: filterProperties.filterParams
+      })
+    }
   }
 
   updateTableList = () => {
@@ -49,7 +62,7 @@ class CreateNodule extends Component {
 
         <Input
             placeholder='Nodule Label'
-            ref={this.tableLabelInput}
+            ref={this.noduleLabelInput}
             icon='tags'
             style={{ width: '300px' }}
           />
@@ -68,7 +81,7 @@ class CreateNodule extends Component {
           onChange={this.handleChange}
         />
 
-        <TableSelect />
+        <TableSelect ref={this.tableSelect} />
 
         { this.renderNoduleForm() }
 

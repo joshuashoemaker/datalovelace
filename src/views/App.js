@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import CreateTableForm from './CreateTable/CreateTableForm'
 import TableList from './TableList/TableList'
 import CreateNodule from './CreateNodule/CreateNodule'
+import NoduleList from './NoduleList/NoduleList'
 
 class App extends Component {
   render = () => {
@@ -12,6 +13,7 @@ class App extends Component {
         <CreateTableForm />
         <CreateNodule />
         <TableList />
+        <NoduleList />
       </div>
     )
   }
