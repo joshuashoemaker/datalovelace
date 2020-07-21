@@ -6,6 +6,7 @@ import './CreateNodule.css'
 import Tables from '../../Collections/Tables'
 import CreateNoduleController from '../../Controllers/CreateNoduleController'
 import TableSelect from './TableSelect'
+import CreateJoinNoduleForm from './CreateJoinNoduleForm'
 
 class CreateNodule extends Component {
   constructor () {
@@ -20,6 +21,7 @@ class CreateNodule extends Component {
     this.controller = new CreateNoduleController()
 
     this.filterNoduleForm = React.createRef()
+    this.joinNoduleForm = React.createRef()
     this.tableSelect = React.createRef()
     this.noduleLabelInput = React.createRef()
 
@@ -31,11 +33,12 @@ class CreateNodule extends Component {
   }
 
   handleSubmit = () => {
+    const { noduleType } = this.state
 
     const noduleLabel = this.noduleLabelInput.current.inputRef.current.value
     const selectedTableLabels = this.tableSelect.current.getSelectedTableLabels()
 
-    if (this.state.noduleType === 'filter') {
+    if (noduleType === 'filter') {
       const filterProperties = this.filterNoduleForm.current.getFilterProperties()
       this.controller.addNewFilterNodule({
         label: noduleLabel,
@@ -51,7 +54,10 @@ class CreateNodule extends Component {
   }
 
   renderNoduleForm = () => {
-    if (this.state.noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} />
+    const { noduleType, tablesToImportByLabel } = this.state
+
+    if (noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} />
+    else if (noduleType === 'join') return <CreateJoinNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
     else return ''
   }
 

@@ -23,6 +23,23 @@ class CreateNoduleController {
     document.dispatchEvent(this.updatedNodulesEvent)
   }
 
+  addNewJoinNodule = props => {
+    const { label, tablesToImportByLabel, baseTableLabel, joinParams } = props
+    const tables = tablesToImportByLabel.map(label => {
+      return this.tables.getTableByLabel(label)
+    })
+
+    this.nodules.addNewJoinNodule({
+      label,
+      tables,
+      joinBy: {
+        baseTableLabel,
+        joinParams
+      }
+    })
+    document.dispatchEvent(this.updatedNodulesEvent)
+  }
+
   deleteNodule = id => {
     this.nodules.removeById(id)
     document.dispatchEvent(this.updatedNodulesEvent)
