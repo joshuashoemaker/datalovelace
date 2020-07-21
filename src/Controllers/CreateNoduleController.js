@@ -35,6 +35,20 @@ class CreateNoduleController {
       joinBy
     })
 
+    document.dispatchEvent(this.updatedNodulesEvent)
+  }
+
+  addNewTransformNodule = props => {
+    const { label, tablesToImportByLabel, structure} = props
+    const tables = tablesToImportByLabel.map(label => {
+      return this.tables.getTableByLabel(label)
+    })
+
+    this.nodules.addNewTransformNodule({
+      label,
+      tables,
+      structure
+    })
     console.log(this.nodules)
     document.dispatchEvent(this.updatedNodulesEvent)
   }

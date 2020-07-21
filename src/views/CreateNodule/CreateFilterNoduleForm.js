@@ -28,6 +28,11 @@ class CreateFilterNoduleForm extends Component {
     this.setState({ filterType: value.value })
   }
 
+  getFilterProperties = () => {
+    const { filterType, filterParams } = this.state
+    return { filterType, filterParams }
+  }
+
   renderFilterParams = () => {
     const { filterParams } = this.state
 

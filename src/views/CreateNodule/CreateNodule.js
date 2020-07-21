@@ -23,6 +23,7 @@ class CreateNodule extends Component {
 
     this.filterNoduleForm = React.createRef()
     this.joinNoduleForm = React.createRef()
+    this.transformNoduleForm = React.createRef()
     this.tableSelect = React.createRef()
     this.noduleLabelInput = React.createRef()
 
@@ -56,6 +57,14 @@ class CreateNodule extends Component {
         joinBy: joinProperties
       })
     }
+    else if (noduleType === 'transform') {
+      const structureProperties = this.transformNoduleForm.current.getStructureProperties()
+      this.controller.addNewJoinNodule({
+        label: noduleLabel,
+        tablesToImportByLabel: selectedTableLabels,
+        structure: structureProperties
+      })
+    }
   }
 
   updateTableList = () => {
@@ -67,7 +76,7 @@ class CreateNodule extends Component {
 
     if (noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} />
     else if (noduleType === 'join') return <CreateJoinNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
-    else if (noduleType === 'transform') return <CreateTransformNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
+    else if (noduleType === 'transform') return <CreateTransformNoduleForm ref={this.transformNoduleForm} tables={tablesToImportByLabel || []}/>
     else return ''
   }
 

@@ -39,6 +39,20 @@ class Nodules {
     }
   }
 
+  addNewTransformNodule = props => {
+    try {
+      const newJoinNodule = new TransformNodule({
+        id: props.id || uuid(),
+        label: props.label,
+        tables: props.tables,
+        structure: props.structure
+      })
+      this.collection.push(newJoinNodule)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   removeById = id => {
     const indexToRemove = this.collection.findIndex(n => n.id === id)
     if (indexToRemove > -1) this.collection.splice(indexToRemove, 1)

@@ -6,7 +6,7 @@ class NoduleistController {
     this.updatedNodulesEvent = new Event('updateNodules')
   }
 
-  deleteTable = id => {
+  deleteNodule = id => {
     this.nodules.removeById(id)
     document.dispatchEvent(this.updatedNodulesEvent)
   }
