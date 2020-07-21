@@ -5,8 +5,9 @@ import './CreateNodule.css'
 
 import Tables from '../../Collections/Tables'
 import CreateNoduleController from '../../Controllers/CreateNoduleController'
-import TableSelect from './TableSelect'
 import CreateJoinNoduleForm from './CreateJoinNoduleForm'
+import CreateTransformNoduleForm from './CreateTransformNoduleForm'
+import TableSelect from './TableSelect'
 
 class CreateNodule extends Component {
   constructor () {
@@ -47,6 +48,14 @@ class CreateNodule extends Component {
         filterParams: filterProperties.filterParams
       })
     }
+    else if (noduleType === 'join') {
+      const joinProperties = this.joinNoduleForm.current.getJoinProperties()
+      this.controller.addNewJoinNodule({
+        label: noduleLabel,
+        tablesToImportByLabel: selectedTableLabels,
+        joinBy: joinProperties
+      })
+    }
   }
 
   updateTableList = () => {
@@ -58,6 +67,7 @@ class CreateNodule extends Component {
 
     if (noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} />
     else if (noduleType === 'join') return <CreateJoinNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
+    else if (noduleType === 'transform') return <CreateTransformNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
     else return ''
   }
 

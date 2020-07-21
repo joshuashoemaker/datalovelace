@@ -10,7 +10,7 @@ class CreateJoinNoduleForm extends Component {
     this.tables = new Tables()
 
     this.state = {
-      bastTableLabel: '',
+      baseTableLabel: '',
       joinParams: [],
       tables: this.tables.getCollectionProps()
     }
@@ -35,7 +35,7 @@ class CreateJoinNoduleForm extends Component {
   }
 
   handleChange = (e, value) => {
-    this.setState({ bastTableLabel: value.value })
+    this.setState({ baseTableLabel: value.value })
   }
 
   getBaseTableDropDownOptions = () => {
@@ -46,6 +46,11 @@ class CreateJoinNoduleForm extends Component {
     })
 
     return options
+  }
+
+  getJoinProperties = () => {
+    const { baseTableLabel, joinParams } = this.state
+    return { baseTableLabel, joinParams }
   }
 
   updateTableList = () => {

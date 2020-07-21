@@ -24,7 +24,7 @@ class CreateNoduleController {
   }
 
   addNewJoinNodule = props => {
-    const { label, tablesToImportByLabel, baseTableLabel, joinParams } = props
+    const { label, tablesToImportByLabel, joinBy} = props
     const tables = tablesToImportByLabel.map(label => {
       return this.tables.getTableByLabel(label)
     })
@@ -32,11 +32,10 @@ class CreateNoduleController {
     this.nodules.addNewJoinNodule({
       label,
       tables,
-      joinBy: {
-        baseTableLabel,
-        joinParams
-      }
+      joinBy
     })
+
+    console.log(this.nodules)
     document.dispatchEvent(this.updatedNodulesEvent)
   }
 
