@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Icon, CardContent } from 'semantic-ui-react'
 import './TableList.css'
 
-import Tables from '../../Collections/Tables'
+import Tables from '../../Models/Tables'
 import TableListController from '../../Controllers/TableListController'
 
 class TableList extends Component {

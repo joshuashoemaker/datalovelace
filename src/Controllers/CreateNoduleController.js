@@ -1,5 +1,5 @@
-import Tables from '../Collections/Tables'
-import Nodules from '../Collections/Nodules'
+import Tables from '../Models/Tables'
+import Nodules from '../Models/Nodules'
 
 class CreateNoduleController {
   constructor() {

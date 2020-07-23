@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Label, Icon } from 'semantic-ui-react'
 import './CreateNodule.css'
 
-import Tables from '../../Collections/Tables'
+import Tables from '../../Models/Tables'
 
 class TableSelect extends Component {
   constructor () {

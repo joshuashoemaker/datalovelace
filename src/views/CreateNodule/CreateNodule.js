@@ -3,7 +3,7 @@ import { Button, Input, Header, Dropdown } from 'semantic-ui-react'
 import CreateFilterNoduleForm from './CreateFilterNoduleForm'
 import './CreateNodule.css'
 
-import Tables from '../../Collections/Tables'
+import Tables from '../../Models/Tables'
 import CreateNoduleController from '../../Controllers/CreateNoduleController'
 import CreateJoinNoduleForm from './CreateJoinNoduleForm'
 import CreateTransformNoduleForm from './CreateTransformNoduleForm'

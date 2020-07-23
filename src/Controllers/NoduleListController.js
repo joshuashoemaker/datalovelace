@@ -1,4 +1,4 @@
-import Nodules from '../Collections/Nodules'
+import Nodules from '../Models/Nodules'
 
 class NoduleistController {
   constructor() {
@@ -9,6 +9,11 @@ class NoduleistController {
   deleteNodule = id => {
     this.nodules.removeById(id)
     document.dispatchEvent(this.updatedNodulesEvent)
+  }
+
+  logExportById = id => {
+    const nodule = this.nodules.getNoduleById(id)
+    console.log(nodule.export())
   }
 }
 

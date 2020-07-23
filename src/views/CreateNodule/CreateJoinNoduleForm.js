@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Input, Dropdown, Button, Icon, List } from 'semantic-ui-react'
 import './CreateNodule.css'
 
-import Tables from '../../Collections/Tables'
+import Tables from '../../Models/Tables'
 
 class CreateJoinNoduleForm extends Component {
   constructor () {

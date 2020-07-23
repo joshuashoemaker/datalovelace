@@ -60,7 +60,9 @@ class Nodules {
 
   getCollectionProps = () => this.collection.map(nodule => nodule.getProperties())
 
-  getTableByLabel = label => this.collection.find(n => label === n.label)
+  getNoduleById = id => this.collection.find(n => id === n.id)
+
+  getNoduleByLabel = label => this.collection.find(n => label === n.label)
 }
 
 export default Nodules

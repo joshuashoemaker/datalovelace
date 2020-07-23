@@ -1,4 +1,4 @@
-import Tables from '../Collections/Tables'
+import Tables from '../Models/Tables'
 import FileAccess from '../Services/FileAccess'
 
 class CreateTableController {
