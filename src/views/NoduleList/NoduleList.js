@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Icon, CardContent } from 'semantic-ui-react'
 import './NoduleList.css'
 
-import Nodule from '../../Collections/Nodules'
+import Nodule from '../../Models/Nodules'
 import NoduleListController from '../../Controllers/NoduleListController'
 
 class NoduleList extends Component {
@@ -28,12 +28,17 @@ class NoduleList extends Component {
           <Card.Header>{ n.label }</Card.Header>
           <Card.Meta>{`${n.tables.length} tables`}</Card.Meta>
         </Card.Content>
-        <CardContent
-          extra
+        <CardContent extra>
+          <span 
           onClick={() => { this.controller.deleteNodule(n.id) }}
-          style={{ cursor: 'pointer' }} 
-        >
-          Delete <Icon name='trash' />
+          style={{ cursor: 'pointer' }}>
+            Delete <Icon name='trash' />
+          </span>
+          <span 
+          onClick={() => { this.controller.logExportById(n.id) }}
+          style={{ cursor: 'pointer' }}>
+            View <Icon name='table' />
+          </span>
         </CardContent>
       </Card>
     )
