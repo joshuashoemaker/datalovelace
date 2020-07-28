@@ -23,7 +23,7 @@ class TableList extends Component {
 
   renderTableListElements = () => {
     const { tables } = this.state
-    const tableListElements = tables.map(t => <TableListItem table={t} /> )
+    const tableListElements = tables.map(t => <TableListItem key={t.id} table={t} /> )
     return tableListElements
   }
 

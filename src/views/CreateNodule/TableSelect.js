@@ -39,7 +39,7 @@ class TableSelect extends Component {
     const tableLabelElements = tables.map(t => {
       const isSelected = selectedTablesLabels.includes(t.label)
       return (
-        <Label onClick={() => this.toggleSelect(t.label)} color={isSelected ? 'blue' : 'grey'} style={{ cursor: 'pointer' }}>
+        <Label key={t.label} onClick={() => this.toggleSelect(t.label)} color={isSelected ? 'blue' : 'grey'} style={{ cursor: 'pointer' }}>
           {t.label}
           { isSelected ? <Icon name='delete' /> : '' }
         </Label>

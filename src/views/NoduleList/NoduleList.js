@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, CardContent } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import NoduleListItem from './NoduleListItem'
 import './NoduleList.css'
 

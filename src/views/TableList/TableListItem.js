@@ -18,12 +18,17 @@ class TableListItem extends Component {
           <Card.Header>{ table.label }</Card.Header>
           <Card.Meta>{`${table.rows.length} rows`}</Card.Meta>
         </Card.Content>
-        <Card.Content
-          extra
+        <Card.Content extra>
+          <span 
           onClick={() => { this.controller.deleteTable(table.id) }}
-          style={{ cursor: 'pointer' }} 
-        >
-          Delete <Icon name='trash' />
+          style={{ cursor: 'pointer' }}>
+            Delete <Icon name='trash' />
+          </span>
+          <span 
+          onClick={() => { this.controller.logExportById(table.id) }}
+          style={{ cursor: 'pointer' }}>
+            View <Icon name='table' />
+          </span>
         </Card.Content>
       </Card>
     )
