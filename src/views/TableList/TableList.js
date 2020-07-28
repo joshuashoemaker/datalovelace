@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Icon, CardContent } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
+import TableListItem from './TableListItem'
 import './TableList.css'
 
 import Tables from '../../Models/Tables'
@@ -22,21 +23,7 @@ class TableList extends Component {
 
   renderTableListElements = () => {
     const { tables } = this.state
-    const tableListElements = tables.map(t => 
-      <Card key={t.id} id={t.id}>
-        <Card.Content>
-          <Card.Header>{ t.label }</Card.Header>
-          <Card.Meta>{`${t.rows.length} rows`}</Card.Meta>
-        </Card.Content>
-        <CardContent
-          extra
-          onClick={() => { this.controller.deleteTable(t.id) }}
-          style={{ cursor: 'pointer' }} 
-        >
-          Delete <Icon name='trash' />
-        </CardContent>
-      </Card>
-    )
+    const tableListElements = tables.map(t => <TableListItem table={t} /> )
     return tableListElements
   }
 

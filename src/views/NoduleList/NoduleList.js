@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Icon, CardContent } from 'semantic-ui-react'
+import NoduleListItem from './NoduleListItem'
 import './NoduleList.css'
 
 import Nodule from '../../Models/Nodules'
@@ -22,26 +23,7 @@ class NoduleList extends Component {
 
   renderTableListElements = () => {
     const { nodules } = this.state
-    const noduleListElements = nodules.map(n => 
-      <Card key={n.id} id={n.id}>
-        <Card.Content>
-          <Card.Header>{ n.label }</Card.Header>
-          <Card.Meta>{`${n.tables.length} tables`}</Card.Meta>
-        </Card.Content>
-        <CardContent extra>
-          <span 
-          onClick={() => { this.controller.deleteNodule(n.id) }}
-          style={{ cursor: 'pointer' }}>
-            Delete <Icon name='trash' />
-          </span>
-          <span 
-          onClick={() => { this.controller.logExportById(n.id) }}
-          style={{ cursor: 'pointer' }}>
-            View <Icon name='table' />
-          </span>
-        </CardContent>
-      </Card>
-    )
+    const noduleListElements = nodules.map(n => <NoduleListItem nodule={n} /> )
     return noduleListElements
   }
 
