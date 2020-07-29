@@ -1,5 +1,4 @@
 import Tables from '../Models/Tables'
-import SelectedTable from '../Models/SelectedTable'
 
 class TableListController {
   constructor() {
@@ -13,8 +12,7 @@ class TableListController {
   }
 
   logExportById = id => {
-    const selectedTable = new SelectedTable(this.tables.getById(id))
-    console.log(selectedTable.headers)
+    console.log(this.tables.getById(id).headers)
   }
 }
 
