@@ -5,6 +5,7 @@ import CreateTableForm from './CreateTable/CreateTableForm'
 import TableList from './TableList/TableList'
 import CreateNodule from './CreateNodule/CreateNodule'
 import NoduleList from './NoduleList/NoduleList'
+import DataTable from './DataTable/DataTable'
 
 class App extends Component {
   render = () => {
@@ -14,6 +15,7 @@ class App extends Component {
         <CreateNodule />
         <TableList />
         <NoduleList />
+        <DataTable />
       </div>
     )
   }

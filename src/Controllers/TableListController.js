@@ -4,6 +4,7 @@ class TableListController {
   constructor() {
     this.tables = new Tables()
     this.updatedTablesEvent = new Event('updateTables')
+    this.setSelectedTableEvent = new Event('setSelectedTable')
   }
 
   deleteTable = id => {
@@ -11,8 +12,9 @@ class TableListController {
     document.dispatchEvent(this.updatedTablesEvent)
   }
 
-  logExportById = id => {
-    console.log(this.tables.getById(id).headers)
+  selectTableToView = id => {
+    this.tables.setSelectedTableById(id)
+    document.dispatchEvent(this.setSelectedTableEvent)
   }
 }
 

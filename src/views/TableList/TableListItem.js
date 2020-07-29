@@ -25,7 +25,7 @@ class TableListItem extends Component {
             Delete <Icon name='trash' />
           </span>
           <span 
-          onClick={() => { this.controller.logExportById(table.id) }}
+          onClick={() => { this.controller.selectTableToView(table.id) }}
           style={{ cursor: 'pointer' }}>
             View <Icon name='table' />
           </span>
