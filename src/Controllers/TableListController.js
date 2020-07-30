@@ -1,8 +1,10 @@
 import Tables from '../Models/Tables'
+import FocusTable from '../Models/FocusTable'
 
 class TableListController {
   constructor() {
     this.tables = new Tables()
+    this.focusTable = new FocusTable()
     this.updatedTablesEvent = new Event('updateTables')
     this.setSelectedTableEvent = new Event('setSelectedTable')
   }
@@ -13,7 +15,8 @@ class TableListController {
   }
 
   selectTableToView = id => {
-    this.tables.setSelectedTableById(id)
+    const table = this.tables.getById(id)
+    this.focusTable.table = table
     document.dispatchEvent(this.setSelectedTableEvent)
   }
 }

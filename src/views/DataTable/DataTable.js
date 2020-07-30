@@ -2,25 +2,27 @@ import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
 
 import Tables from '../../Models/Tables'
+import FocusTable from '../../Models/FocusTable'
 
 class DataTable extends Component {
   constructor (props) {
     super(props)
     this.tables = new Tables()
+    this.focusTable = new FocusTable()
     this.state = {
       headers: [],
       tableData: []
     }
     
-    document.addEventListener('setSelectedTable', this.setSelectedTable)
+    document.addEventListener('setSelectedTable', this.setFocusTable)
   }
 
-  setSelectedTable = () => {
-    const selectedTable = this.tables.selectedTable
-    if (selectedTable) {
+  setFocusTable = () => {
+    const focusTable = this.focusTable.table
+    if (focusTable) {
       this.setState({
-        headers: selectedTable.headers,
-        tableData: selectedTable.rows
+        headers: focusTable.headers,
+        tableData: focusTable.rows
       })
     }
   }
@@ -39,11 +41,8 @@ class DataTable extends Component {
 
 
   renderTableRowElements = () => {
-    const { tableData, headers } = this.state
-    const tableRowElements = tableData.map(d => {
-      return <Table.Row>{ this.renderCellElements(d) }</Table.Row>
-    })
-
+    const { tableData } = this.state
+    const tableRowElements = tableData.map(d => <Table.Row>{ this.renderCellElements(d) }</Table.Row> )
     return tableRowElements
   }
 

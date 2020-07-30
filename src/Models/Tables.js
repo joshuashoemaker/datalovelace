@@ -7,7 +7,6 @@ class Tables {
   constructor () {
     if (!instance) instance = this
     this.collection = []
-    this.selectedTable = null
     return instance
   }
 
@@ -32,12 +31,6 @@ class Tables {
   getCollectionProps = () => this.collection.map(table => table.getProperties())
 
   getById = id => this.collection.find(t => id === t.id)
-
-  setSelectedTableById = id => {
-    const table = this.collection.find(t => id === t.id)
-    if (table) this.selectedTable = table
-    else this.selectedTable = null
-  }
 }
 
 export default Tables
