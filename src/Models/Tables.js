@@ -31,6 +31,8 @@ class Tables {
   getCollectionProps = () => this.collection.map(table => table.getProperties())
 
   getById = id => this.collection.find(t => id === t.id)
+
+  getTableByLabel = label => this.collection.find(t => label === t.label)
 }
 
 export default Tables

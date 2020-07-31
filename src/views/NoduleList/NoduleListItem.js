@@ -25,9 +25,14 @@ class NoduleListItem extends Component {
             Delete <Icon name='trash' />
           </span>
           <span 
-          onClick={() => { this.controller.logExportById(nodule.id) }}
+          onClick={() => { this.controller.selectTableToView(nodule.id) }}
           style={{ cursor: 'pointer' }}>
             View <Icon name='table' />
+          </span>
+          <span 
+          onClick={() => { this.controller.convertNoduleToTable(nodule.id) }}
+          style={{ cursor: 'pointer' }}>
+            To Table <Icon name='clone' />
           </span>
         </Card.Content>
       </Card>
