@@ -1,4 +1,4 @@
-import { Table } from 'dmein'
+import { Table } from 'lovelacejs'
 import { uuid } from 'uuidv4'
 
 let instance = null

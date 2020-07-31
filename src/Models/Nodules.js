@@ -1,4 +1,4 @@
-import { FilterNodule, JoinNodule, TransformNodule } from 'dmein'
+import { FilterNodule, JoinNodule, TransformNodule } from 'lovelacejs'
 import { uuid } from 'uuidv4'
 
 let instance = null
