@@ -81,12 +81,12 @@ class CreateJoinNoduleForm extends Component {
           { this.renderJoinParams() }
         </List>
 
-        <Input label='Primary Table Key' placeholder='Key' ref={this.primaryTableKeyInput} style={{ width: '160px' }} />
-        <Input label='Foreign Table Key' placeholder='Key' ref={this.foreignTableInput} style={{ width: '163px' }} />
-        <Input label='Matching Key' placeholder='Key' ref={this.matchingKeyInput} style={{ width: '296px' }} />
+        <Input label='Primary Key' placeholder='Key' ref={this.primaryTableKeyInput} style={{ width: '100%' }} />
+        <Input label='Foreign Table' placeholder='Label' ref={this.foreignTableInput} style={{ width: '100%' }} />
+        <Input label='Foreign Key' placeholder='Key' ref={this.matchingKeyInput} style={{ width: '100%' }} />
         <br />
 
-        <Button animated='vertical' onClick={this.addJoinParam} >
+        <Button animated='vertical' onClick={this.addJoinParam}>
           <Button.Content hidden><Icon name='add' /></Button.Content>
           <Button.Content visible>Add</Button.Content>
         </Button>
