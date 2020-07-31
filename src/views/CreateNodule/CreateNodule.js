@@ -30,6 +30,11 @@ class CreateNodule extends Component {
     document.addEventListener('updateTables', this.updateTableList)
   }
 
+  clearInput = () => {
+    this.setState({ noduleType: '' })
+    this.tableSelect.current.clearTablesSelected()
+  }
+
   handleChange = (e, value) => {
     this.setState({ noduleType: value.value })
   }
@@ -65,6 +70,8 @@ class CreateNodule extends Component {
         structure: structureProperties
       })
     }
+
+    this.clearInput()
   }
 
   updateTableList = () => {
@@ -94,6 +101,7 @@ class CreateNodule extends Component {
           <br />
 
         <Dropdown
+          value ={this.state.noduleType}
           placeholder='Select a Nodule Type'
           options={[
             {key: 'Join Nodule', text: 'Join Nodule', value: 'join', icon: 'sitemap'},

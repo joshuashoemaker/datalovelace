@@ -15,6 +15,10 @@ class TableSelect extends Component {
     document.addEventListener('updateTables', this.updateTableList)
   }
 
+  clearTablesSelected = () => {
+    this.setState({ selectedTablesLabels: [] })
+  }
+
   getSelectedTableLabels = () => this.state.selectedTablesLabels
 
   toggleSelect = label => {

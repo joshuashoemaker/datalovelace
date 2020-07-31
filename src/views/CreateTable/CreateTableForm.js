@@ -12,12 +12,24 @@ class CreateTableForm extends Component {
     this.tableFileInput = React.createRef()
   }
 
+  // handleLabelChange = (e, value) => {
+  //   e.preventDefault()
+  //   this.setState({ label: value })
+  // }
+
+  // handleFileChange = (e, value) => {
+  //   e.preventDefault()
+  //   this.setState({ file: value })
+  // }
+
   handleSubmit = async e => {
     e.preventDefault()
     const label = this.tableLabelInput.current.inputRef.current.value
     const file = this.tableFileInput.current.inputRef.current.files[0]
 
     this.controller.submitLocalFile({ label, file })
+
+    this.tableLabelInput.current.inputRef.current.value = ''
   }
 
   render = () => {
