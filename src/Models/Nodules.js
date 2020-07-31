@@ -41,13 +41,14 @@ class Nodules {
 
   addNewTransformNodule = props => {
     try {
-      const newJoinNodule = new TransformNodule({
+      const newTransformNodule = new TransformNodule({
         id: props.id || uuid(),
         label: props.label,
         tables: props.tables,
         structure: props.structure
       })
-      this.collection.push(newJoinNodule)
+      console.log(newTransformNodule)
+      this.collection.push(newTransformNodule)
     } catch (err) {
       console.error(err)
     }

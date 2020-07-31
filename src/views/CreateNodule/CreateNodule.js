@@ -59,7 +59,7 @@ class CreateNodule extends Component {
     }
     else if (noduleType === 'transform') {
       const structureProperties = this.transformNoduleForm.current.getStructureProperties()
-      this.controller.addNewJoinNodule({
+      this.controller.addNewTransformNodule({
         label: noduleLabel,
         tablesToImportByLabel: selectedTableLabels,
         structure: structureProperties
