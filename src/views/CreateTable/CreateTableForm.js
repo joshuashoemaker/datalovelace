@@ -12,16 +12,6 @@ class CreateTableForm extends Component {
     this.tableFileInput = React.createRef()
   }
 
-  // handleLabelChange = (e, value) => {
-  //   e.preventDefault()
-  //   this.setState({ label: value })
-  // }
-
-  // handleFileChange = (e, value) => {
-  //   e.preventDefault()
-  //   this.setState({ file: value })
-  // }
-
   handleSubmit = async e => {
     e.preventDefault()
     const label = this.tableLabelInput.current.inputRef.current.value
