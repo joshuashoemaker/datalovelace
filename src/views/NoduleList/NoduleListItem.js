@@ -13,7 +13,7 @@ class NoduleListItem extends Component {
   render = () => {
     const { nodule } = this.props 
     return (
-      <Card key={nodule.id} id={nodule.id}>
+      <Card key={nodule.id} id={nodule.id} style={{ width: '380px' }}>
         <Card.Content>
           <Card.Header>{ nodule.label }</Card.Header>
           <Card.Meta>{`${nodule.tables.length} tables`}</Card.Meta>

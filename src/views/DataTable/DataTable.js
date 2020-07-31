@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
+import './DataTable.css'
 
 import Tables from '../../Models/Tables'
 import FocusTable from '../../Models/FocusTable'

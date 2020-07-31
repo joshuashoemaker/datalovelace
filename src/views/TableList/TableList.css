@@ -1,0 +1,7 @@
+.TableList {
+  height: calc(100vh - 100px);
+}
+
+.listItem {
+  width: 400px;
+}

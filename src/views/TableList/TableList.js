@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
+import CreateTableForm from '../CreateTable/CreateTableForm'
 import TableListItem from './TableListItem'
 import './TableList.css'
 
@@ -12,10 +13,15 @@ class TableList extends Component {
 
     this.tables = new Tables()
     this.controller = new TableListController()
-    this.state = { tables: this.tables.getCollectionProps() }
+    this.state = {
+      adding: false,
+      tables: this.tables.getCollectionProps()
+    }
 
     document.addEventListener('updateTables', this.updateTableList)
   }
+
+  toggleAddingTable = () => { this.setState({ adding: !this.state.adding }) }
 
   updateTableList = () => {
     this.setState({tables: this.tables.getCollectionProps()})
@@ -31,6 +37,11 @@ class TableList extends Component {
     return (
       <div className='TableList'>
         <Card.Group>
+        <Button animated primary style={{ width: '100%', display: 'block' }} onClick={this.toggleAddingTable}>
+          <Button.Content visible>Add Table</Button.Content>
+          <Button.Content hidden><Icon name='add' /></Button.Content>
+        </Button>
+        {this.state.adding ? <CreateTableForm /> : ''}
           { this.renderTableListElements() }
         </Card.Group>
       </div>

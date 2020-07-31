@@ -1,8 +1,17 @@
 .CreateTableForm {
   width: 380px;
+  height: 100%;
   padding: 40px;
   border-radius: 6px;
   border: solid rgb(240, 240, 240) 1px;
+}
+
+.CreateTablePopOver {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 50px 20px;
 }
 
 .creatTableFormSubmitButtons {

@@ -13,7 +13,7 @@ class TableListItem extends Component {
   render = () => {
     const { table } = this.props
     return (
-      <Card key={table.id} id={table.id}>
+      <Card key={table.id} id={table.id} style={{ width: '380px' }}>
         <Card.Content>
           <Card.Header>{ table.label }</Card.Header>
           <Card.Meta>{`${table.rows.length} rows`}</Card.Meta>
