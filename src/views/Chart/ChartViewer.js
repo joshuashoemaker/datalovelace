@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ChartJsChart from '../../Models/Chart/ChartjsChart'
+import ChartJsDataset from '../../Models/Chart/ChartjsDataset'
 import FocusTable from '../../Models/FocusTable'
 import { Doughnut } from 'react-chartjs-2'
 import { Dropdown } from 'semantic-ui-react'
@@ -32,14 +32,14 @@ class ChartViewer extends Component {
 
   renderChart = () => {
     if (!this.state.table) return
-    const chart = new ChartJsChart({
-      label: 'test chart',
+    const chart = new ChartJsDataset({
+      label: this.state.label,
       type: 'bar',
       table: this.state.table,
       groupByValue: this.state.groupByValue
     })
 
-    console.log(chart.props)
+    console.log(chart)
 
     return <Doughnut data={chart.props} width={600} height={600} />
   }
@@ -59,7 +59,7 @@ class ChartViewer extends Component {
     return (
       <div className='ChartViewer'>
         <Dropdown
-          placeholder='Select a Comparison Type'
+          placeholder='Select Value to Report'
           fluid
           selection
           options={this.state.headers}

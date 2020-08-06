@@ -1,16 +1,12 @@
 import Chart from './Chart.js'
 import { GroupByNodule } from 'lovelacejs'
 
-class ChartJsChart extends Chart {
-  constructor (props) {
-    super(props)
-  }
-
+class ChartJsDataset extends Chart {
   get props () {
 
     const groupByNodule = new GroupByNodule({
       id: this.table.id,
-      label: `${this.table.label} groupedBy something`,
+      label: `${this.table.label} groupedBy ${this.groupByValue}`,
       tables: [this.table],
       groupByValue: this.groupByValue
     }).export()
@@ -30,12 +26,6 @@ class ChartJsChart extends Chart {
         backgroundColor: this._getbackgroundColors()
       }],
     }
-
-    // return [{
-    //   label: this.label,
-    //   data: groupByCounts,
-    //   backgroundColor: this._getbackgroundColors()
-    // }]
   }
 
   _generateRandomRGBNumber () {
@@ -53,4 +43,4 @@ class ChartJsChart extends Chart {
   }
 }
 
-export default ChartJsChart
+export default ChartJsDataset
