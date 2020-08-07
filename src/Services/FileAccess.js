@@ -48,7 +48,6 @@ class FileAccess {
 
   setFile = file => {
     if (this.validateFileType(file)) this.file = file
-    console.log(file.type)
   }
 
   validateFileType= file => {
