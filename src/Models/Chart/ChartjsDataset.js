@@ -2,11 +2,10 @@ import Chart from './Chart.js'
 import { GroupByNodule } from 'lovelacejs'
 
 class ChartJsDataset extends Chart {
-  get props () {
-
+  get doughnut () {
     const groupByNodule = new GroupByNodule({
-      id: this.table.id,
-      label: `${this.table.label} groupedBy ${this.groupByValue}`,
+      id: this.id,
+      label: `${this.label} groupedBy ${this.groupByValue}`,
       tables: [this.table],
       groupByValue: this.groupByValue
     }).export()
@@ -21,7 +20,7 @@ class ChartJsDataset extends Chart {
     return {
       labels: labels,
       datasets: [{
-        label: this.label,
+        label: `${this.label} groupedBy ${this.groupByValue}`,
         data: groupByCounts,
         backgroundColor: this._getbackgroundColors()
       }],

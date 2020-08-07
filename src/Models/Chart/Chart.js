@@ -2,10 +2,20 @@ import chartTypes from '../../Constants/chartTypes'
 
 class Chart {
   constructor (props) {
+    this.id = props.id
     this.label = props.label
     this.table = props.table
     this.type = props.type
     this.groupByValue = props.groupByValue
+  }
+
+  get id () {
+    return this._id
+  }
+
+  set id (newId) {
+    this._id = newId
+    return this._id
   }
 
   get data () {
