@@ -41,6 +41,7 @@ class CreateTableForm extends Component {
             ref={this.tableFileInput}
             icon='file'
             style={{ width: '300px' }}
+            accept=".xls,.xlsx,.json"
           />
 
           <div className='creatTableFormSubmitButtons'>
