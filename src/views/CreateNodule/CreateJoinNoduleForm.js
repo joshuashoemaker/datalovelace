@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Dropdown, Button, Icon, List } from 'semantic-ui-react'
+import { Dropdown, Button, Icon, List } from 'semantic-ui-react'
 import './CreateNodule.css'
 
 import Tables from '../../Models/Tables'
@@ -11,6 +11,9 @@ class CreateJoinNoduleForm extends Component {
 
     this.state = {
       baseTableLabel: '',
+      foreignTableLabel: '',
+      primaryTableKey: '',
+      foreignTableKey: '',
       joinParams: [],
       tables: this.tables.getCollectionProps()
     }
@@ -22,11 +25,12 @@ class CreateJoinNoduleForm extends Component {
   }
 
   addJoinParam = () => {
-    let joinParams = this.state.joinParams || []
+    const { joinParams, foreignTableLabel, primaryTableKey, foreignTableKey } = this.state
 
-    const foreignTable = this.foreignTableInput.current.inputRef.current.value
-    const primaryTableKey = this.primaryTableKeyInput.current.inputRef.current.value
-    const matchingKey = this.matchingKeyInput.current.inputRef.current.value
+    const foreignTable = foreignTableLabel
+    const matchingKey = foreignTableKey
+
+    console.log(foreignTable, primaryTableKey, matchingKey)
 
     if (foreignTable && matchingKey && primaryTableKey)
       joinParams.push({ foreignTable, primaryTableKey, matchingKey })
@@ -34,17 +38,53 @@ class CreateJoinNoduleForm extends Component {
     this.setState({ joinParams: joinParams })
   }
 
-  handleChange = (e, value) => {
+  handleBaseTableChange = (e, value) => {
     this.setState({ baseTableLabel: value.value })
   }
 
-  getBaseTableDropDownOptions = () => {
-    const { tables } = this.state
+  handleForeignTableChange = (e, value) => {
+    this.setState({ foreignTableLabel: value.value })
+  }
 
+  handlePrimaryKeyChange = (e, value) => {
+    this.setState({ primaryTableKey: value.value })
+  }
+
+  handleForeignKeyChange = (e, value) => {
+    this.setState({ foreignTableKey: value.value })
+  }
+
+  getPrimaryHeadersDropDownOptions = () => {
+    const { baseTableLabel } = this.state
+
+    if (!baseTableLabel) return []
+
+    const table = this.tables.getTableByLabel(baseTableLabel)
+    const headers = table.headers
+    const dropdownOptions = headers.map(h => {
+      return { key: h, text: h, value: h }
+    })
+    return dropdownOptions
+  }
+
+  getForeignHeadersDropDownOptions = () => {
+    const { foreignTableLabel } = this.state
+
+    if (!foreignTableLabel) return []
+
+    const table = this.tables.getTableByLabel(foreignTableLabel)
+    const headers = table.headers
+    const dropdownOptions = headers.map(h => {
+      return { key: h, text: h, value: h }
+    })
+    return dropdownOptions
+  }
+
+  getTableDropDownOptions = () => {
+    const { tables } = this.state
     const options = tables.map(t => {
       return { key: t.label, text: t.label, value: t.label }
     })
-
     return options
   }
 
@@ -58,10 +98,10 @@ class CreateJoinNoduleForm extends Component {
   }
 
   renderJoinParams = () => {
-    const { joinParams, bastTableLabel } = this.state
+    const { joinParams, baseTableLabel } = this.state
 
     const joinParamsElements = joinParams.map(p => {
-      return <List.Item>{`${bastTableLabel}::${p.primaryTableKey} = ${p.foreignTable}::${p.matchingKey}`}</List.Item>
+      return <List.Item>{`${baseTableLabel}::${p.primaryTableKey} = ${p.foreignTable}::${p.matchingKey}`}</List.Item>
     })
     return joinParamsElements
   }
@@ -70,20 +110,52 @@ class CreateJoinNoduleForm extends Component {
     return (
       <div className='CreateFiltrerNoduleForm'>
         <Dropdown
-          placeholder='Select a Base Table'
+          clearable
+          search
+          header='Primary Table'
+          placeholder='Select a Primary Table'
           fluid
           selection
-          options={this.getBaseTableDropDownOptions()}
-          onChange={this.handleChange}
+          options={this.getTableDropDownOptions()}
+          onChange={this.handleBaseTableChange}
         />
 
         <List celled>
           { this.renderJoinParams() }
         </List>
 
-        <Input label='Primary Key' placeholder='Key' ref={this.primaryTableKeyInput} style={{ width: '100%' }} />
-        <Input label='Foreign Table' placeholder='Label' ref={this.foreignTableInput} style={{ width: '100%' }} />
-        <Input label='Foreign Key' placeholder='Key' ref={this.matchingKeyInput} style={{ width: '100%' }} />
+        <Dropdown
+          clearable
+          search
+          header='Primary Key'
+          placeholder='Select a Primary Key'
+          fluid
+          selection
+          options={this.getPrimaryHeadersDropDownOptions()}
+          onChange={this.handlePrimaryKeyChange}
+        />
+        
+        <Dropdown
+          clearable
+          search
+          header='Foreign Table'
+          placeholder='Select a Foreign Table'
+          fluid
+          selection
+          options={this.getTableDropDownOptions()}
+          onChange={this.handleForeignTableChange}
+        />
+
+        <Dropdown
+          clearable
+          search
+          header='Foreign Key'
+          placeholder='Select a Foreign Key'
+          fluid
+          selection
+          options={this.getForeignHeadersDropDownOptions()}
+          onChange={this.handleForeignKeyChange}
+        />
         <br />
 
         <Button animated='vertical' onClick={this.addJoinParam}>
