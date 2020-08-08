@@ -1,3 +1,10 @@
+.brandHeader {
+  display: flex;
+  justify-content: space-around;
+  width: 280px;
+  margin: 0px auto;
+}
+
 .Nav{
   height: 40px;
   background-color: #2185d0;
@@ -9,4 +16,9 @@
   display: inline-block;
   margin: 10px auto 0px auto;
   font-size: 24px;
+}
+
+.logo {
+   width: 36px;
+   border-radius: 100%;
 }
