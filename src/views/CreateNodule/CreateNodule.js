@@ -93,12 +93,11 @@ class CreateNodule extends Component {
         <Header as='h3'>Create Nodule</Header>
 
         <Input
-            placeholder='Nodule Label'
-            ref={this.noduleLabelInput}
-            icon='tags'
-            style={{ width: '300px' }}
-          />
-          <br />
+          placeholder='Nodule Label'
+          ref={this.noduleLabelInput}
+          icon='tags'
+          fluid
+        />
 
         <Dropdown
           value ={this.state.noduleType}
@@ -110,7 +109,7 @@ class CreateNodule extends Component {
           ]}
           fluid
           selection
-          style={{ width: '300px' }}
+          fluid
           onChange={this.handleChange}
         />
 

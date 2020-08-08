@@ -75,7 +75,7 @@ class CreateFilterNoduleForm extends Component {
             <List celled>
               { filterParamElements.filterValueElements }
             </List>
-            <Input placeholder='Key' ref={this.valueInput} style={{ width: '115px' }} />
+            <Input placeholder='Value' ref={this.valueInput} style={{ width: '115px' }} />
             <Button animated='vertical' onClick={this.addKeyValueInput}>
               <Button.Content hidden><Icon name='add' /></Button.Content>
               <Button.Content visible>Add</Button.Content>
