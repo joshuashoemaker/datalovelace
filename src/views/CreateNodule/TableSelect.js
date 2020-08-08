@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Label, Icon } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import './CreateNodule.css'
 
 import Tables from '../../Models/Tables'
@@ -21,41 +21,36 @@ class TableSelect extends Component {
 
   getSelectedTableLabels = () => this.state.selectedTablesLabels
 
-  toggleSelect = label => {
-    const { selectedTablesLabels } = this.state
-    let newselectedTablesLabels = selectedTablesLabels
-  
-    const selectedIndex = selectedTablesLabels.findIndex(selected => selected === label)
-
-    if (selectedIndex === -1) newselectedTablesLabels.push(label)
-    else if (selectedIndex === 0 && selectedTablesLabels.length === 1) newselectedTablesLabels = []
-    else newselectedTablesLabels.splice(selectedIndex, 1)
-
-    this.setState({ selectedTablesLabels: newselectedTablesLabels })
+  toggleSelect = (event, element) => {
+    this.setState({ selectedTablesLabels: element.value })
   }
 
   updateTableList = () => {
     this.setState({tables: this.tables.getCollectionProps()})
   }
 
-  renderTableLabels = () => {
-    const { selectedTablesLabels, tables } = this.state
-    const tableLabelElements = tables.map(t => {
-      const isSelected = selectedTablesLabels.includes(t.label)
-      return (
-        <Label key={t.label} onClick={() => this.toggleSelect(t.label)} color={isSelected ? 'blue' : 'grey'} style={{ cursor: 'pointer' }}>
-          {t.label}
-          { isSelected ? <Icon name='delete' /> : '' }
-        </Label>
-      )
+  renderTableDropdownOptions = () => {
+    const { tables } = this.state
+    const options = tables.map(t => {
+      return {key: t.label, value: t.label, text: t.label}
     })
-    return tableLabelElements
+    return options
   }
 
   render = () => {
     return (
       <div className='TableSelect'>
-        { this.renderTableLabels() }
+        <Dropdown
+          clearable
+          placeholder='Included Tables'
+          header='Included Tables'
+          fluid
+          multiple
+          search
+          selection
+          options={this.renderTableDropdownOptions()}
+          onChange={this.toggleSelect}
+        />
       </div>
     )
   }
