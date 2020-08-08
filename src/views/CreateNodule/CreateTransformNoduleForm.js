@@ -46,24 +46,24 @@ class CreateTransformNoduleForm extends Component {
     const structureElements = this.renderStructure()
     return (
       <div className='CreateFiltrerNoduleForm'>
-        <Grid columns={2} relaxed='very' stackable>
+        <Grid columns={2} stackable>
           <Grid.Column>
             <List celled>
               { structureElements.initialKeyElements }
             </List>
-            <Input placeholder='Initial Key' ref={this.initialKeyInput} style={{ width: '115px' }} />
+            <Input placeholder='Initial Key' ref={this.initialKeyInput} fluid />
           </Grid.Column>
           <Grid.Column>
             <List celled>
               { structureElements.newKeyElements }
             </List>
-            <Input placeholder='New Key' ref={this.newKeyInput} style={{ width: '115px' }} />
-            <Button animated='vertical' onClick={this.addStructureInput}>
+            <Input placeholder='New Key' ref={this.newKeyInput} fluid />
+          </Grid.Column>
+        </Grid>
+            <Button fluid animated='vertical' onClick={this.addStructureInput}>
               <Button.Content hidden><Icon name='add' /></Button.Content>
               <Button.Content visible>Add</Button.Content>
             </Button>
-          </Grid.Column>
-        </Grid>
       </div>
     )
   }

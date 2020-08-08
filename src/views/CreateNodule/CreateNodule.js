@@ -99,6 +99,8 @@ class CreateNodule extends Component {
           fluid
         />
 
+        <TableSelect ref={this.tableSelect} />
+
         <Dropdown
           value ={this.state.noduleType}
           placeholder='Select a Nodule Type'
@@ -109,11 +111,8 @@ class CreateNodule extends Component {
           ]}
           fluid
           selection
-          fluid
           onChange={this.handleChange}
         />
-
-        <TableSelect ref={this.tableSelect} />
 
         { this.renderNoduleForm() }
 

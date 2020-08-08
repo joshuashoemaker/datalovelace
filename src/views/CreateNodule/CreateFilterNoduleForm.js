@@ -64,24 +64,24 @@ class CreateFilterNoduleForm extends Component {
           onChange={this.handleChange}
         />
 
-        <Grid columns={2} relaxed='very' stackable>
+        <Grid columns={2} stackable>
           <Grid.Column>
             <List celled>
               { filterParamElements.filterKeyElements }
             </List>
-            <Input placeholder='Key' ref={this.keyInput} style={{ width: '115px' }} />
+            <Input placeholder='Key' ref={this.keyInput} fluid />
           </Grid.Column>
           <Grid.Column>
             <List celled>
               { filterParamElements.filterValueElements }
             </List>
-            <Input placeholder='Value' ref={this.valueInput} style={{ width: '115px' }} />
-            <Button animated='vertical' onClick={this.addKeyValueInput}>
-              <Button.Content hidden><Icon name='add' /></Button.Content>
-              <Button.Content visible>Add</Button.Content>
-            </Button>
+            <Input placeholder='Value' ref={this.valueInput} fluid />
           </Grid.Column>
         </Grid>
+        <Button fluid animated='vertical' onClick={this.addKeyValueInput}>
+          <Button.Content hidden><Icon name='add' /></Button.Content>
+          <Button.Content visible>Add</Button.Content>
+        </Button>
       </div>
     )
   }
