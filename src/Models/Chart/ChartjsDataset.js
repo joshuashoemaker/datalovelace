@@ -2,28 +2,87 @@ import Chart from './Chart.js'
 import { GroupByNodule } from 'lovelacejs'
 
 class ChartJsDataset extends Chart {
-  get doughnut () {
-    const groupByNodule = new GroupByNodule({
+  constructor (props) {
+    super(props)
+
+    this.groupByNodule = new GroupByNodule({
       id: this.id,
       label: `${this.label} groupedBy ${this.groupByValue}`,
       tables: [this.table],
       groupByValue: this.groupByValue
     }).export()
-
-    const labels = Object.keys(groupByNodule)
-
-    let groupByCounts = []
-    for (let key in groupByNodule) {
-      groupByCounts.push(groupByNodule[key].length)
-    }
     
+    this.chartLabels = Object.keys(this.groupByNodule)
+
+    this.groupByCounts = []
+    for (let key in this.groupByNodule) {
+      this.groupByCounts.push(this.groupByNodule[key].length)
+    }
+  } 
+
+  get bar () {
     return {
-      labels: labels,
+      labels: this.chartLabels,
+      datasets: [{
+        label: this.label,
+        backgroundColor: `rgb(${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()})`,
+        data: this.groupByCounts
+      }]
+    }
+  }
+
+  get doughnut () {
+    return {
+      labels: this.chartLabels,
       datasets: [{
         label: `${this.label} groupedBy ${this.groupByValue}`,
-        data: groupByCounts,
+        data: this.groupByCounts,
         backgroundColor: this._getbackgroundColors()
       }],
+    }
+  }
+
+  get line () {
+    return {
+      labels: this.chartLabels,
+      datasets: [{
+        label: this.label,
+        backgroundColor: `rgb(${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()})`,
+        data: this.groupByCounts
+      }]
+    }
+  }
+
+  get pie () {
+    return {
+      labels: this.chartLabels,
+      datasets: [{
+        label: `${this.label} groupedBy ${this.groupByValue}`,
+        data: this.groupByCounts,
+        backgroundColor: this._getbackgroundColors()
+      }],
+    }
+  }
+
+  get polar () {
+    return {
+      labels: this.chartLabels,
+      datasets: [{
+        label: this.label,
+        backgroundColor: this._getbackgroundColors(),
+        data: this.groupByCounts
+      }]
+    }
+  }
+
+  get radar () {
+    return {
+      labels: this.chartLabels,
+      datasets: [{
+        label: this.label,
+        backgroundColor: `rgba(${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, 0.2)`,
+        data: this.groupByCounts
+      }]
     }
   }
 
@@ -36,7 +95,7 @@ class ChartJsDataset extends Chart {
   _getbackgroundColors () {
     const labels = this.labels
     const backgroundColors = labels.map(l => {
-      return `rgb(${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()})`
+      return `rgba(${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, ${this._generateRandomRGBNumber()}, 0.4)`
     })
     return backgroundColors
   }

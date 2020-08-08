@@ -1,5 +1,6 @@
 import { uuid } from 'uuidv4'
 import ChartJsDataset from '../../Models/Chart/ChartjsDataset'
+import chartjsTypes from '../../Constants/chartjsTypes' 
 
 let instance = null
 
@@ -12,8 +13,7 @@ class Charts {
 
   addNewChart = chart => {
     let newChart = null
-    if (chart.type === 'bar') newChart = this._generateChartJsDataset(chart)
-    if (chart.type === 'doughnut') newChart = this._generateChartJsDataset(chart)
+    if (chartjsTypes.includes(chart.type)) newChart = this._generateChartJsDataset(chart)
 
     if (newChart) this.collection.push(newChart)
   }
