@@ -52,7 +52,7 @@ class ChartViewer extends Component {
     return (
       <div className='ChartViewer'>
         {this.renderChart()}
-        <Button onClick={this.saveChart}>Save As Image</Button>
+        { this.state.chart ? <Button onClick={this.saveChart}>Save As Image</Button> : '' }
       </div>
     )
   }
