@@ -1,5 +1,6 @@
 import { uuid } from 'uuidv4'
 import OneAxisChart from '../../Models/Chart/OneAxisChart'
+import TwoAxisChart from '../../Models/Chart/TwoAxisChart'
 import chartTypes from '../../Constants/chartTypes' 
 
 let instance = null
@@ -14,6 +15,7 @@ class Charts {
   addNewChart = chart => {
     let newChart = null
     if (chartTypes.oneAxisCharts.includes(chart.type)) newChart = this._generateOneAxisChart(chart)
+    if (chartTypes.twoAxisCharts.includes(chart.type)) newChart = this._generateTwoAxisChart(chart)
 
     if (newChart) this.collection.push(newChart)
   }
@@ -48,6 +50,19 @@ class Charts {
       type: chart.type,
       table: chart.table,
       reportValue: chart.reportValue
+    })
+    return newChart
+  }
+
+  _generateTwoAxisChart = chart => {
+    const newChart = new TwoAxisChart({
+      id: chart.id || uuid(),
+      label: chart.label,
+      type: chart.type,
+      table: chart.table,
+      xAxis: chart.xAxis,
+      yAxis: chart.yAxis
+      // reportValue: chart.reportValue
     })
     return newChart
   }

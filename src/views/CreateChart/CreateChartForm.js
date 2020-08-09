@@ -17,7 +17,9 @@ class CreateChartForm extends Component {
       selectedTableId: '',
       tables: this.tables.getCollectionProps(),
       reportValue: '',
-      headers : []
+      headers : [],
+      xAxisValue: '',
+      yAxisValue: ''
     }
 
     this.tables = new Tables()
@@ -45,8 +47,16 @@ class CreateChartForm extends Component {
     this.setState({ chartType: value.value })
   }
 
-  handleGroupByChange = (e, value) => {
+  handleReportValueChange = (e, value) => {
     this.setState({ reportValue: value.value })
+  }
+
+  handleXAxisChange = (e, value) => {
+    this.setState({ xAxisValue: value.value })
+  }
+
+  handleYAxisChange = (e, value) => {
+    this.setState({ yAxisValue: value.value })
   }
 
   handleSelectedTableChange = (e, value) => {
@@ -69,7 +79,7 @@ class CreateChartForm extends Component {
     return tableDropdownOptions
   }
 
-  getGroupByDropDownOptions = () => {
+  getHeaderDropDownOptions = () => {
     const { headers } = this.state
     const tableDropdownOptions = headers.map(h => {
       return {
@@ -82,19 +92,63 @@ class CreateChartForm extends Component {
   }
 
   handleSubmit = () => {
-    const { chartType, selectedTableId, reportValue } = this.state
+    const { chartType, selectedTableId, reportValue, xAxisValue, yAxisValue } = this.state
 
     const chartLabel = this.chartLabelInput.current.inputRef.current.value
-    // const reportValue = this.reportValueInput.current.inputRef.current.value
     const table = this.tables.getById(selectedTableId)
     this.controller.addNewChart({
       label: chartLabel,
       type: chartType,
       table: table,
-      reportValue: reportValue
+      reportValue: reportValue,
+      xAxis: xAxisValue,
+      yAxis: yAxisValue
     })
 
     this.clearInput()
+  }
+
+  renderConfigOptions = () => {
+    const { oneAxisCharts, twoAxisCharts } = chartTypes
+    const { chartType } = this.state
+
+    let configElements = []
+    if (oneAxisCharts.includes(chartType)) configElements.push(
+      <Dropdown
+        value ={this.state.reportValue}
+        placeholder='Report By'
+        options={this.getHeaderDropDownOptions()}
+        fluid
+        selection
+        style={{ width: '300px' }}
+        onChange={this.handleReportValueChange}
+      />
+    )
+    else if (twoAxisCharts.includes(chartType)) {
+      configElements.push(
+        <Dropdown
+          value ={this.state.xAxisValue}
+          placeholder='X-Axis'
+          options={this.getHeaderDropDownOptions()}
+          fluid
+          selection
+          style={{ width: '300px' }}
+          onChange={this.handleXAxisChange}
+        />
+      )
+      configElements.push(
+        <Dropdown
+          value ={this.state.yAxisValue}
+          placeholder='Y-Axis'
+          options={this.getHeaderDropDownOptions()}
+          fluid
+          selection
+          style={{ width: '300px' }}
+          onChange={this.handleYAxisChange}
+        />
+      )
+    }
+    return configElements
   }
 
   updateTableList = () => {
@@ -107,21 +161,10 @@ class CreateChartForm extends Component {
         <Header as='h3'>Create Graph</Header>
 
         <Input
-            placeholder='Chart Label'
-            ref={this.chartLabelInput}
-            icon='tags'
-            style={{ width: '300px' }}
-          />
-          <br />
-
-        <Dropdown
-          value ={this.state.chartType}
-          placeholder='Select a Chart Type'
-          options={this.getChartTypeDropdownOptions()}
-          fluid
-          selection
+          placeholder='Chart Label'
+          ref={this.chartLabelInput}
+          icon='tags'
           style={{ width: '300px' }}
-          onChange={this.handleChartTypeChange}
         />
 
         <Dropdown
@@ -133,16 +176,18 @@ class CreateChartForm extends Component {
           style={{ width: '300px' }}
           onChange={this.handleSelectedTableChange}
         />
-        
+
         <Dropdown
-          value ={this.state.selectedTable}
-          placeholder='Group By'
-          options={this.getGroupByDropDownOptions()}
+          value ={this.state.chartType}
+          placeholder='Select a Chart Type'
+          options={this.getChartTypeDropdownOptions()}
           fluid
           selection
           style={{ width: '300px' }}
-          onChange={this.handleGroupByChange}
+          onChange={this.handleChartTypeChange}
         />
+
+        { this.renderConfigOptions() }
 
         <div className='creatTableFormSubmitButtons'>
           <Button content='Cancel' secondary />

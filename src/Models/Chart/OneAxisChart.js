@@ -7,7 +7,7 @@ class OneAxisChart extends Chart {
 
     this.groupByNodule = new GroupByNodule({
       id: this.id,
-      label: `${this.label} groupedBy ${this.reportValue}`,
+      label: `${this.label} Grouped By ${this.reportValue}`,
       tables: [this.table],
       groupByValue: this.reportValue
     }).export()

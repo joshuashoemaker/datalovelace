@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FocusChart from '../../Models/Chart/FocusChart'
-import { Doughnut, Bar, Line, Pie, Polar, Radar } from 'react-chartjs-2'
+import { Doughnut, Bar, Line, Pie, Polar, Radar, Scatter } from 'react-chartjs-2'
 import { Button } from 'semantic-ui-react'
 import download from 'downloadjs'
 
@@ -48,13 +48,15 @@ class ChartViewer extends Component {
     if (chart.type === 'pie')  return <Pie data={chart[chart.type]} width={600} height={600} ref={this.chart} />
     if (chart.type === 'polar')  return <Polar data={chart[chart.type]} width={600} height={600} ref={this.chart} />
     if (chart.type === 'radar')  return <Radar data={chart[chart.type]} width={600} height={600} ref={this.chart} />
+    if (chart.type === 'scatter')  return <Scatter data={chart[chart.type]} width={600} height={600} ref={this.chart} />
   }
 
   render = () => {
     return (
       <div className='ChartViewer'>
         {this.renderChart()}
-        { this.state.chart ? <Button onClick={this.saveChart}>Save As Image</Button> : '' }
+        <br />
+        { this.state.chart ? <Button fluid onClick={this.saveChart}>Save As Image</Button> : '' }
       </div>
     )
   }

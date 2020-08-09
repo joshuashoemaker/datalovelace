@@ -12,6 +12,8 @@ class CreateTableController {
       type: chart.type,
       table: chart.table,
       reportValue: chart.reportValue,
+      xAxis: chart.xAxis,
+      yAxis: chart.yAxis
     })
     document.dispatchEvent(this.updatedChartsEvent)
   }
