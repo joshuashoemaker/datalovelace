@@ -30,7 +30,7 @@ class Charts {
         label: c.label,
         table: c.table.label,
         type: c.type,
-        groupByValue: c.groupByValue
+        reportValue: c.reportValue
       }
     })
     return chartProps
@@ -47,7 +47,7 @@ class Charts {
       label: chart.label,
       type: chart.type,
       table: chart.table,
-      groupByValue: chart.groupByValue
+      reportValue: chart.reportValue
     })
     return newChart
   }

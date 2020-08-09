@@ -6,7 +6,7 @@ class Chart {
     this.label = props.label
     this.table = props.table
     this.type = props.type
-    this.groupByValue = props.groupByValue
+    this.reportValue = props.reportValue
   }
 
   get id () {
@@ -34,13 +34,13 @@ class Chart {
     return this._chartType
   }
 
-  get groupByValue () {
-    return this._groupByValue
+  get reportValue () {
+    return this._reportValue
   }
 
-  set groupByValue (value) {
-    this._groupByValue = value || this._groupByValue
-    return this._groupByValue
+  set reportValue (value) {
+    this._reportValue = value || this._reportValue
+    return this._reportValue
   } 
 
   set table (table) {

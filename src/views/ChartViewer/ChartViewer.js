@@ -11,14 +11,14 @@ class ChartViewer extends Component {
     this.chart = React.createRef()
     this.state = {
       chart: null,
-      groupByValue: ''
+      reportValue: ''
     }
 
     document.addEventListener('setSelectedChart', this.setFocusChart)
   }
 
   handleGroupByChange = (e, value) => {
-    this.setState({ groupByValue: value.value })
+    this.setState({ reportValue: value.value })
   }
 
   saveChart = () => {
@@ -39,6 +39,8 @@ class ChartViewer extends Component {
   renderChart = () => {
     const { chart } = this.state
     if (!chart) return
+
+    console.log(chart)
 
     if (chart.type === 'bar')  return <Bar data={chart[chart.type]} width={600} height={600} ref={this.chart} />
     if (chart.type === 'doughnut')  return <Doughnut data={chart[chart.type]} width={600} height={600} ref={this.chart} />

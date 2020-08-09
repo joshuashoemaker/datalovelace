@@ -16,7 +16,7 @@ class CreateChartForm extends Component {
       chartType: '',
       selectedTableId: '',
       tables: this.tables.getCollectionProps(),
-      groupByValue: '',
+      reportValue: '',
       headers : []
     }
 
@@ -25,7 +25,7 @@ class CreateChartForm extends Component {
     this.controller = new CreateChartController()
 
     this.chartLabelInput = React.createRef()
-    this.groupByValueInput = React.createRef()
+    this.reportValueInput = React.createRef()
 
     document.addEventListener('updateTables', this.updateTableList)
   }
@@ -46,7 +46,7 @@ class CreateChartForm extends Component {
   }
 
   handleGroupByChange = (e, value) => {
-    this.setState({ groupByValue: value.value })
+    this.setState({ reportValue: value.value })
   }
 
   handleSelectedTableChange = (e, value) => {
@@ -82,16 +82,16 @@ class CreateChartForm extends Component {
   }
 
   handleSubmit = () => {
-    const { chartType, selectedTableId, groupByValue } = this.state
+    const { chartType, selectedTableId, reportValue } = this.state
 
     const chartLabel = this.chartLabelInput.current.inputRef.current.value
-    // const groupByValue = this.groupByValueInput.current.inputRef.current.value
+    // const reportValue = this.reportValueInput.current.inputRef.current.value
     const table = this.tables.getById(selectedTableId)
     this.controller.addNewChart({
       label: chartLabel,
       type: chartType,
       table: table,
-      groupByValue: groupByValue
+      reportValue: reportValue
     })
 
     this.clearInput()

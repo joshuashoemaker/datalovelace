@@ -1,15 +1,15 @@
 import Chart from './Chart.js'
 import { GroupByNodule } from 'lovelacejs'
 
-class ChartJsDataset extends Chart {
+class OneAxisChart extends Chart {
   constructor (props) {
     super(props)
 
     this.groupByNodule = new GroupByNodule({
       id: this.id,
-      label: `${this.label} groupedBy ${this.groupByValue}`,
+      label: `${this.label} groupedBy ${this.reportValue}`,
       tables: [this.table],
-      groupByValue: this.groupByValue
+      groupByValue: this.reportValue
     }).export()
     
     this.chartLabels = Object.keys(this.groupByNodule)
@@ -35,7 +35,7 @@ class ChartJsDataset extends Chart {
     return {
       labels: this.chartLabels,
       datasets: [{
-        label: `${this.label} groupedBy ${this.groupByValue}`,
+        label: `${this.label} groupedBy ${this.reportValue}`,
         data: this.groupByCounts,
         backgroundColor: this._getbackgroundColors()
       }],
@@ -57,7 +57,7 @@ class ChartJsDataset extends Chart {
     return {
       labels: this.chartLabels,
       datasets: [{
-        label: `${this.label} groupedBy ${this.groupByValue}`,
+        label: `${this.label} groupedBy ${this.reportValue}`,
         data: this.groupByCounts,
         backgroundColor: this._getbackgroundColors()
       }],
@@ -101,4 +101,4 @@ class ChartJsDataset extends Chart {
   }
 }
 
-export default ChartJsDataset
+export default OneAxisChart

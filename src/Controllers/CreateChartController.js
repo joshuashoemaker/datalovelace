@@ -11,7 +11,7 @@ class CreateTableController {
       label: chart.label,
       type: chart.type,
       table: chart.table,
-      groupByValue: chart.groupByValue,
+      reportValue: chart.reportValue,
     })
     document.dispatchEvent(this.updatedChartsEvent)
   }
