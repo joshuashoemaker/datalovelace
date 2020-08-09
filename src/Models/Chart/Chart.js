@@ -57,7 +57,8 @@ class Chart {
   }
 
   _validateChartType = type => {
-    if (chartTypes.includes(type)) return true
+    const allChartTypes = Object.values(chartTypes).flat()
+    if (allChartTypes.includes(type)) return true
     else return false
   }
 }

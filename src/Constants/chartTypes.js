@@ -1,3 +1,3 @@
-export default [
-  'line', 'bar', 'radar', 'doughnut', 'pie', 'polar', /*'bubble', 'scatter', 'area', 'mixed' */
-]
+export default {
+  oneAxisCharts: ['line', 'bar', 'radar', 'doughnut', 'pie', 'polar'] /*'bubble', 'scatter', 'area', 'mixed' */
+}

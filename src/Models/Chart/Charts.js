@@ -1,6 +1,6 @@
 import { uuid } from 'uuidv4'
-import ChartJsDataset from '../../Models/Chart/ChartjsDataset'
-import chartjsTypes from '../../Constants/chartjsTypes' 
+import OneAxisChart from '../../Models/Chart/OneAxisChart'
+import chartTypes from '../../Constants/chartTypes' 
 
 let instance = null
 
@@ -13,7 +13,7 @@ class Charts {
 
   addNewChart = chart => {
     let newChart = null
-    if (chartjsTypes.includes(chart.type)) newChart = this._generateChartJsDataset(chart)
+    if (chartTypes.oneAxisCharts.includes(chart.type)) newChart = this._generateOneAxisChart(chart)
 
     if (newChart) this.collection.push(newChart)
   }
@@ -41,8 +41,8 @@ class Charts {
     if (indexToRemove > -1) this.collection.splice(indexToRemove, 1)
   }
 
-  _generateChartJsDataset = chart => {
-    const newChart = new ChartJsDataset({
+  _generateOneAxisChart = chart => {
+    const newChart = new OneAxisChart({
       id: chart.id || uuid(),
       label: chart.label,
       type: chart.type,

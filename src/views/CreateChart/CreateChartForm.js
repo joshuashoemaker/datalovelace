@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Input, Header, Dropdown } from 'semantic-ui-react'
-// import './CreateNodule.css'
 
 import Tables from '../../Models/Tables'
 import Nodules from '../../Models/Nodules'
@@ -36,7 +35,8 @@ class CreateChartForm extends Component {
   }
 
   getChartTypeDropdownOptions = () => {
-    return chartTypes.map(t => {
+    const allChartTypes = Object.values(chartTypes).flat()
+    return allChartTypes.map(t => {
       return {key: t, text: t, value: t}
     })
   }
