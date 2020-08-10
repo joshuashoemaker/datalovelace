@@ -7,6 +7,8 @@ class Chart {
     this.table = props.table
     this.type = props.type
     this.reportValue = props.reportValue
+    this.xAxis = props.xAxis
+    this.yAxis = props.yAxis
   }
 
   get id () {
@@ -38,6 +40,14 @@ class Chart {
     return this._reportValue
   }
 
+  get xAxis () {
+    return this._xAxis
+  }
+
+  get yAxis () {
+    return this._yAxis
+  }
+
   set reportValue (value) {
     this._reportValue = value || this._reportValue
     return this._reportValue
@@ -54,6 +64,16 @@ class Chart {
     const isChartTypeValid = this._validateChartType(value)
     if (isChartTypeValid) this._chartType = value
     else this._chartType = null
+  }
+
+  set xAxis (value) {
+    this._xAxis = value
+    return this._xAxis
+  }
+
+  set yAxis (value) {
+    this._yAxis = value
+    return this._yAxis
   }
 
   _validateChartType = type => {

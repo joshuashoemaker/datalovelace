@@ -109,7 +109,7 @@ class CreateChartForm extends Component {
   }
 
   renderConfigOptions = () => {
-    const { oneAxisCharts, twoAxisCharts } = chartTypes
+    const { oneAxisCharts, twoAxisCharts, threeAxisCharts } = chartTypes
     const { chartType } = this.state
 
     let configElements = []
@@ -145,6 +145,41 @@ class CreateChartForm extends Component {
           selection
           style={{ width: '300px' }}
           onChange={this.handleYAxisChange}
+        />
+      )
+    }
+    else if (threeAxisCharts.includes(chartType)) {
+      configElements.push(
+        <Dropdown
+          value ={this.state.xAxisValue}
+          placeholder='X-Axis'
+          options={this.getHeaderDropDownOptions()}
+          fluid
+          selection
+          style={{ width: '300px' }}
+          onChange={this.handleXAxisChange}
+        />
+      )
+      configElements.push(
+        <Dropdown
+          value ={this.state.yAxisValue}
+          placeholder='Y-Axis'
+          options={this.getHeaderDropDownOptions()}
+          fluid
+          selection
+          style={{ width: '300px' }}
+          onChange={this.handleYAxisChange}
+        />
+      )
+      configElements.push(
+        <Dropdown
+          value ={this.state.reportValue}
+          placeholder='Report By'
+          options={this.getHeaderDropDownOptions()}
+          fluid
+          selection
+          style={{ width: '300px' }}
+          onChange={this.handleReportValueChange}
         />
       )
     }

@@ -3,14 +3,11 @@ import Chart from './Chart'
 class TwoAxisChart extends Chart {
   constructor (props) {
     super(props)
-    this.xAxis = props.xAxis
-    this.yAxis = props.yAxis
     this.rows = props.table.export()
   }
 
   get scatter () {
-    const rows = this.table.export()
-    const data = rows.map(r => {
+    const data = this.rows.map(r => {
       return { x: r[this.xAxis], y: r[this.yAxis] }
     })
 
