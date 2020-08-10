@@ -1,5 +1,4 @@
 import Chart from './Chart.js'
-import { GroupByNodule } from 'lovelacejs'
 
 class ThreeAxisChart extends Chart {
   constructor (props) {
