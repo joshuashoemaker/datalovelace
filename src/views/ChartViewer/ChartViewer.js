@@ -22,7 +22,6 @@ class ChartViewer extends Component {
   }
 
   saveChart = () => {
-    console.log(this.chart.current)
     const base64OfChart = this.chart.current.chartInstance.toBase64Image()
     download(base64OfChart, this.focusChart.chart.label, 'image/png')
   }
@@ -39,8 +38,6 @@ class ChartViewer extends Component {
   renderChart = () => {
     const { chart } = this.state
     if (!chart) return
-
-    console.log(chart)
 
     if (chart.type === 'bar')  return <Bar data={chart[chart.type]} width={600} height={600} ref={this.chart} />
     if (chart.type === 'doughnut')  return <Doughnut data={chart[chart.type]} width={600} height={600} ref={this.chart} />
