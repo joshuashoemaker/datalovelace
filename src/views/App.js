@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import 'semantic-ui-css/semantic.min.css'
+
 import DataTable from './DataTable/DataTable'
 import ListViewer from './ListViewer/ListViewer'
 import Nav from './Nav/Nav'

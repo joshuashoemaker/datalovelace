@@ -1,8 +1,21 @@
 .brandHeader {
   display: flex;
   justify-content: space-around;
-  width: 280px;
+  width: 140px;
   margin: 0px auto;
+}
+
+.documentationLink{
+  color: white;
+  display: block;
+  font-size: 18px;
+  padding: 10px 16px;
+  width: 140px;
+}
+
+.documentationLink:hover{
+  color: black;
+  background-color: white;
 }
 
 .Nav{
@@ -10,6 +23,9 @@
   background-color: #2185d0;
   color: white;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .appName {
@@ -21,4 +37,25 @@
 .logo {
    width: 36px;
    border-radius: 100%;
+}
+
+
+.sponsorLink {
+  color: white;
+  display: flex;
+  font-size: 18px;
+  padding: 1.5px 16px;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+}
+
+.sponsorLink:hover{
+  color: black;
+  background-color: rgb(255, 171, 75);
+}
+
+
+.sponsorLink img {
+  width: 36px;
 }
