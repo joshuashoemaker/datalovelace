@@ -29,7 +29,6 @@ class CreateFilterNoduleForm extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    console.log(nextProps.tables)
     this.setState({tables: nextProps.tables})
   }
 

@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
-import { Input, Grid, Button, Icon, List } from 'semantic-ui-react'
+import { Input, Grid, Button, Icon, List, Dropdown } from 'semantic-ui-react'
+import Tables from '../../Models/Tables'
 import './CreateNodule.css'
 
 class CreateTransformNoduleForm extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      structure: {}
+      structure: {},
+      tables: props.tables
     }
+
+    this.tables = new Tables()
 
     this.initialKeyInput = React.createRef()
     this.newKeyInput = React.createRef()
@@ -15,18 +19,41 @@ class CreateTransformNoduleForm extends Component {
   }
 
   addStructureInput = () => {
-    let structure = this.state.structure || {}
+    let { structure, keyValue } = this.state
 
-    const initialKey = this.initialKeyInput.current.inputRef.current.value
+    // const initialKey = this.initialKeyInput.current.inputRef.current.value
     const newKey = this.newKeyInput.current.inputRef.current.value
 
-    if (initialKey && newKey) structure[initialKey] = newKey
+    if (keyValue && newKey) structure[keyValue] = newKey
 
     this.setState({ structure: structure })
   }
 
+  componentWillReceiveProps = nextProps => {
+    this.setState({tables: nextProps.tables})
+  }
+
+  getHeadersDropDownOptions = () => {
+    const { tables } = this.state
+    if (!tables || tables.length === 0) return []
+
+    const headers = tables.map(t => {
+      const table = this.tables.getTableByLabel(t)
+      return table.headers
+    }).flat()
+
+    const dropdownOptions = headers.map(h => {
+      return { key: h, text: h, value: h }
+    })
+    return dropdownOptions
+  }
+
   getStructureProperties = () => {
     return this.state.structure
+  }
+
+  handleKeyChange = (e, value) => {
+    this.setState({ keyValue: value.value })
   }
 
   renderStructure = () => {
@@ -51,7 +78,20 @@ class CreateTransformNoduleForm extends Component {
             <List celled>
               { structureElements.initialKeyElements }
             </List>
-            <Input placeholder='Initial Key' ref={this.initialKeyInput} fluid />
+
+
+            {/* <Input placeholder='Initial Key' ref={this.initialKeyInput} fluid /> */}
+            <Dropdown
+              clearable
+              search
+              header='Headers'
+              placeholder='Header Key'
+              fluid
+              selection
+              options={this.getHeadersDropDownOptions()}
+              onChange={this.handleKeyChange}
+            />
+
           </Grid.Column>
           <Grid.Column>
             <List celled>
