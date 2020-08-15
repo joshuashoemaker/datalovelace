@@ -33,6 +33,7 @@ class CreateNodule extends Component {
 
   clearInput = () => {
     this.setState({ noduleType: '' })
+    this.noduleLabelInput.current.inputRef.current.value = ''
     this.tableSelect.current.clearTablesSelected()
   }
 
@@ -123,7 +124,7 @@ class CreateNodule extends Component {
         { this.renderNoduleForm() }
 
         <div className='creatTableFormSubmitButtons'>
-          <Button content='Cancel' secondary />
+          <Button content='Cancel' secondary onClick={this.clearInput} />
           <Button content='Confirm' primary onClick={this.handleSubmit} />
         </div>
       </div>

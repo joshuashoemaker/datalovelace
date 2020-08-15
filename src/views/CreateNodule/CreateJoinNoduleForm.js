@@ -156,9 +156,8 @@ class CreateJoinNoduleForm extends Component {
           options={this.getForeignHeadersDropDownOptions()}
           onChange={this.handleForeignKeyChange}
         />
-        <br />
 
-        <Button animated='vertical' onClick={this.addJoinParam}>
+        <Button fluid animated='vertical' onClick={this.addJoinParam}>
           <Button.Content hidden><Icon name='add' /></Button.Content>
           <Button.Content visible>Add</Button.Content>
         </Button>
