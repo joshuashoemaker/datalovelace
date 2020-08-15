@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { Input, Dropdown, Grid, Button, Icon, List } from 'semantic-ui-react'
+import Tables from '../../Models/Tables'
 import './CreateNodule.css'
 
 class CreateFilterNoduleForm extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       filterType: '',
-      filterParams: {}
+      filterParams: {},
+      tables: props.tables
     }
+
+    this.tables = new Tables()
 
     this.keyInput = React.createRef()
     this.valueInput = React.createRef()
@@ -18,19 +22,43 @@ class CreateFilterNoduleForm extends Component {
   addKeyValueInput = () => {
     let filterParams = this.state.filterParams || {}
 
-    if (this.keyInput.current.inputRef.current.value)
-      filterParams[this.keyInput.current.inputRef.current.value] = this.valueInput.current.inputRef.current.value
+    if (this.state.keyValue)
+      filterParams[this.state.keyValue] = this.valueInput.current.inputRef.current.value
 
     this.setState({ filterParams: filterParams })
   }
 
-  handleChange = (e, value) => {
+  componentWillReceiveProps = nextProps => {
+    console.log(nextProps.tables)
+    this.setState({tables: nextProps.tables})
+  }
+
+  handleComparisonChange = (e, value) => {
     this.setState({ filterType: value.value })
+  }
+
+  handleKeyChange = (e, value) => {
+    this.setState({ keyValue: value.value })
   }
 
   getFilterProperties = () => {
     const { filterType, filterParams } = this.state
     return { filterType, filterParams }
+  }
+
+  getHeadersDropDownOptions = () => {
+    const { tables } = this.state
+    if (!tables || tables.length === 0) return []
+
+    const headers = tables.map(t => {
+      const table = this.tables.getTableByLabel(t)
+      return table.headers
+    }).flat()
+
+    const dropdownOptions = headers.map(h => {
+      return { key: h, text: h, value: h }
+    })
+    return dropdownOptions
   }
 
   renderFilterParams = () => {
@@ -61,7 +89,7 @@ class CreateFilterNoduleForm extends Component {
             {key: 'LESSER', text: 'LESSER THAN', value: 'LESSER'},
             {key: 'LESSEREQUAL', text: 'LESSER THEN EQUAL TO', value: 'LESSEREQUAL'}
           ]}
-          onChange={this.handleChange}
+          onChange={this.handleComparisonChange}
         />
 
         <Grid columns={2} stackable>
@@ -69,7 +97,18 @@ class CreateFilterNoduleForm extends Component {
             <List celled>
               { filterParamElements.filterKeyElements }
             </List>
-            <Input placeholder='Key' ref={this.keyInput} fluid />
+
+            <Dropdown
+              clearable
+              search
+              header='Headers'
+              placeholder='Header Key'
+              fluid
+              selection
+              options={this.getHeadersDropDownOptions()}
+              onChange={this.handleKeyChange}
+            />
+
           </Grid.Column>
           <Grid.Column>
             <List celled>

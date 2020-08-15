@@ -15,7 +15,8 @@ class CreateNodule extends Component {
 
     this.state = {
       noduleType: '',
-      tablesToImportByLabel: []
+      tablesToImportByLabel: [],
+      selectedTablesLabels: []
     }
 
     this.tables = new Tables()
@@ -35,8 +36,12 @@ class CreateNodule extends Component {
     this.tableSelect.current.clearTablesSelected()
   }
 
-  handleChange = (e, value) => {
+  handleNoduleTypeChange = (e, value) => {
     this.setState({ noduleType: value.value })
+  }
+
+  handleSelectedTablesChange = labels => {
+    this.setState({ selectedTablesLabels: labels })
   }
 
   handleSubmit = () => {
@@ -79,11 +84,12 @@ class CreateNodule extends Component {
   }
 
   renderNoduleForm = () => {
-    const { noduleType, tablesToImportByLabel } = this.state
+    const { noduleType, selectedTablesLabels } = this.state
+    console.log(selectedTablesLabels)
 
-    if (noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} />
-    else if (noduleType === 'join') return <CreateJoinNoduleForm ref={this.joinNoduleForm} tables={tablesToImportByLabel || []}/>
-    else if (noduleType === 'transform') return <CreateTransformNoduleForm ref={this.transformNoduleForm} tables={tablesToImportByLabel || []}/>
+    if (noduleType === 'filter') return <CreateFilterNoduleForm ref={this.filterNoduleForm} tables={selectedTablesLabels} />
+    else if (noduleType === 'join') return <CreateJoinNoduleForm ref={this.joinNoduleForm} tables={selectedTablesLabels} />
+    else if (noduleType === 'transform') return <CreateTransformNoduleForm ref={this.transformNoduleForm} tables={selectedTablesLabels} />
     else return ''
   }
 
@@ -99,7 +105,7 @@ class CreateNodule extends Component {
           fluid
         />
 
-        <TableSelect ref={this.tableSelect} />
+        <TableSelect ref={this.tableSelect} onChange={this.handleSelectedTablesChange} />
 
         <Dropdown
           value ={this.state.noduleType}
@@ -111,7 +117,7 @@ class CreateNodule extends Component {
           ]}
           fluid
           selection
-          onChange={this.handleChange}
+          onChange={this.handleNoduleTypeChange}
         />
 
         { this.renderNoduleForm() }

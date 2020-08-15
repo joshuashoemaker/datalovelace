@@ -23,6 +23,7 @@ class TableSelect extends Component {
 
   toggleSelect = (event, element) => {
     this.setState({ selectedTablesLabels: element.value })
+    this.props.onChange(element.value)
   }
 
   updateTableList = () => {
