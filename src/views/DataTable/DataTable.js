@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
+import {json2excel} from 'js2excel'
 import './DataTable.css'
 
 import Tables from '../../Models/Tables'
@@ -23,7 +24,8 @@ class DataTable extends Component {
     if (focusTable) {
       this.setState({
         headers: focusTable.headers,
-        tableData: focusTable.rows
+        tableData: focusTable.rows,
+        label: focusTable.label
       })
     }
   }
@@ -47,9 +49,25 @@ class DataTable extends Component {
     return tableRowElements
   }
 
+  saveTable = () => {
+    const { tableData, label } = this.state
+    try {
+      json2excel({
+        data: tableData,
+        name: label
+      })
+      // download(tableFile, this.focusTable.label, 'application/vnd.ms-excel')
+    } catch (err) {
+      console.log(err)
+      window.alert('Issue downloading Table.')
+    }
+  }
+
   render = () => {
+    const { tableData, label } = this.state
     return (
       <div className='DataTable'>
+        { tableData.length ? <Button className='saveTableAsExcel' fluid  onClick={this.saveTable}>Download { label } Table</Button> : '' }
         <Table celled>
           <Table.Header>
             <Table.Row>
