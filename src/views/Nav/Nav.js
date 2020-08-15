@@ -8,7 +8,7 @@ class Nav extends Component {
   render = () => {
     return (
       <div className='Nav'>
-        <a className='documentationLink' target='_blank' rel='noopener noreferrer' href='https://docs.lovelace.technology'><img src={guideIcon} alt='guide button' />Guide</a>
+        <a className='documentationLink' target='_blank' rel='noopener noreferrer' href='https://docs.datalovelace.app'><img src={guideIcon} alt='guide button' />Guide</a>
         <div className='brandHeader'>
           <img src={adaLovelaceLogo} alt='logo' className='logo' />
           <span className='appName'>Lovelace</span>
