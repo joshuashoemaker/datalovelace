@@ -3,6 +3,7 @@ import FocusChart from '../../Models/Chart/FocusChart'
 import { Doughnut, Bar, Line, Pie, Polar, Radar, Scatter, Bubble } from 'react-chartjs-2'
 import { Button } from 'semantic-ui-react'
 import download from 'downloadjs'
+import './ChartViewer.css'
 
 class ChartViewer extends Component {
   constructor () {
@@ -17,6 +18,11 @@ class ChartViewer extends Component {
     document.addEventListener('setSelectedChart', this.setFocusChart)
   }
 
+  closeChart = () => {
+    this.focusChart.chart = null
+    this.setFocusChart()
+  }
+
   handleGroupByChange = (e, value) => {
     this.setState({ reportValue: value.value })
   }
@@ -28,11 +34,9 @@ class ChartViewer extends Component {
 
   setFocusChart = () => {
     const focusChart = this.focusChart.chart
-    if (focusChart) {
-      this.setState({
-        chart: focusChart
-      })
-    }
+    this.setState({
+      chart: focusChart
+    })
   }
 
   renderChart = () => {
@@ -50,11 +54,14 @@ class ChartViewer extends Component {
   }
 
   render = () => {
+    const chart = this.state.chart || {}
     return (
       <div className='ChartViewer'>
+        <h3 className='chartLabel'>{ chart.label }</h3>
         {this.renderChart()}
         <br />
-        { this.state.chart ? <Button fluid onClick={this.saveChart}>Save As Image</Button> : '' }
+        { this.state.chart ? <Button className='saveChartAsImageButton' fluid  primary onClick={this.saveChart}>Save As Image</Button> : '' }
+        { this.state.chart ? <Button className='closeChartButton' fluid onClick={this.closeChart}>Close Chart</Button> : '' }
       </div>
     )
   }
