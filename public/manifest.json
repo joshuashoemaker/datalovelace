@@ -1,6 +1,7 @@
 {
   "short_name": "Lovelace",
   "name": "datalovelace.app",
+  "description": "With Lovelace you can take all of your varying data sources, aggregate them to one place, and perform what ever kind of reports on them you need to either create beautiful chart representations, or a robust tabular export of your data.",
   "icons": [
     {
       "src": "favicon.png",
@@ -8,12 +9,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
